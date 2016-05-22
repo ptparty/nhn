@@ -1,0 +1,36 @@
+
+import java.util.HashSet;
+import java.util.Random;
+
+public class RecordMaker{
+	public static void main(String[] args) {
+		int idMax=100000; //id는 0~99999 사이
+		int scMax=100; //score는 0점 이상 100점 미만. 
+		int Count;
+		HashSet<Integer> set= new HashSet<Integer>(); //Find, insert가 빠른 자료구조 사용
+		Random ran=new Random();
+
+		if(args.length<1) {
+			System.out.println("Error:출력할 사원 수(1~99999) 를 인자값으로 입력");
+			System.exit(0);
+		}
+		
+		Count = Integer.parseInt(args[0]); //인자값 받음
+		
+		if(Count<1 || Count>99999){
+			System.out.println("Error:1~99999 사이의 값을 입력");
+			System.exit(0);
+		}
+	
+		for(int i=0; i<Count; i++){
+			int id=ran.nextInt(idMax);
+			int score=ran.nextInt(scMax);
+			while(set.contains(id)){
+				id=ran.nextInt(idMax);
+			}
+			set.add(id); 
+			System.out.println(String.format("NT%05d ", id)+score);
+		}
+	}
+}
+
